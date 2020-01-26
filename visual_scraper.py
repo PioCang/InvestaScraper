@@ -1,14 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import argparse
 import time
 
 BROWSER = webdriver.Firefox()
 
-def build_master_list():
-    MASTER_LIST_FILE = "PSEMasterlist.csv"
+def build_master_list(ticker_file):
     master_list = []
 
-    with open(MASTER_LIST_FILE, "r") as fp:
+    with open(ticker_file, "r") as fp:
         for line in fp:
             master_list.append(line.rstrip())
 
@@ -57,8 +57,19 @@ def jump_to(master_list, starting_point=None):
 
     return master_list[master_list.index(starting_point):]
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "ticker_file",
+        nargs="?",
+        default="PSEMasterlist.csv",
+        help="Newline-separated file of ticker symbols."
+    )
+    return parser.parse_args().ticker_file
+
 if __name__ == "__main__":
-    master_list = build_master_list()
+    ticker_file = parse_args()
+    master_list = build_master_list(ticker_file)
     starting_point = get_starting_point()
     master_list = jump_to(master_list, starting_point)
     iterate_through(master_list)
