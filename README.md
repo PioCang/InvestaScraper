@@ -14,7 +14,7 @@ To check if activation was successful,
 ```
 which python; which python3
 ```
-should point to a director other than _ /usr/bin/python/ _
+should point to a director other than _/usr/bin/python/_
 4. Install __selenium__
 ```
 sudo pip install selenium
@@ -24,3 +24,9 @@ sudo pip install selenium
 (my_env)_dir/bin/
 ```
 6. Run your Python script. 
+
+7. When you're done, run
+```
+deactivate
+```
+
