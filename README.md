@@ -14,14 +14,15 @@ To check if activation was successful,
 ```
 which python; which python3
 ```
-should point to a director other than _/usr/bin/python/_
+should point to a directory other than _/usr/bin/python/_
+
 4. Install __selenium__
 ```
 sudo pip install selenium
 ```
 5. Download __geckodriver__ and put it in
 ```
-(my_env)_dir/bin/
+/path/to/(my_env)/bin/
 ```
 6. Run your Python script. 
 

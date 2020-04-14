@@ -3,8 +3,6 @@ from selenium.webdriver.common.keys import Keys
 import argparse
 import time
 
-BROWSER = webdriver.Firefox()
-
 def build_master_list(ticker_file):
     master_list = []
 
@@ -20,6 +18,7 @@ def iterate_through(master_list):
 
     INVESTAGRAMS_URL = "https://www.investagrams.com/stock/"
     SLEEP_DURATION = 3
+    TARGET_COUNT_TO_PAUSE = 5
     links_generated = 0
 
     for company in master_list:
@@ -31,7 +30,7 @@ def iterate_through(master_list):
         time.sleep(SLEEP_DURATION)
 
         links_generated += 1
-        if links_generated % 10 == 0:
+        if links_generated % TARGET_COUNT_TO_PAUSE == 0:
             print("{} links generated.".format(links_generated)
                 + " Stopping at {}.".format(company)
                 + " Press Enter to continue...", end='')
@@ -72,5 +71,7 @@ if __name__ == "__main__":
     master_list = build_master_list(ticker_file)
     starting_point = get_starting_point()
     master_list = jump_to(master_list, starting_point)
+
+    BROWSER = webdriver.Firefox()
     iterate_through(master_list)
 
